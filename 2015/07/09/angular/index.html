@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>利用AngularJS解决产品的国际化多语言版本问题 | Shiyi&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="摘要：产品在国际化的时候，面临需要提供多种语言版本的问题，那么在基于html技术开发的产品中，如何适配不同的语言呢。利用angular.js，我们可以比传统方式更好更优雅的解决这个问题。参考： AngularJS中文网最近，市场方面提出了客户端国际化的需求，包括英文版和繁体中文版。我们的WEB后台是通过不同的XML文件定义Labels，通过点击界面的按钮来加载不同的XML文件，从而改变整个UI所有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用AngularJS解决产品的国际化多语言版本问题">
+<meta property="og:url" content="http://zhoushiyi.com/2015/07/09/angular/index.html">
+<meta property="og:site_name" content="Shiyi's blog">
+<meta property="og:description" content="摘要：产品在国际化的时候，面临需要提供多种语言版本的问题，那么在基于html技术开发的产品中，如何适配不同的语言呢。利用angular.js，我们可以比传统方式更好更优雅的解决这个问题。参考： AngularJS中文网最近，市场方面提出了客户端国际化的需求，包括英文版和繁体中文版。我们的WEB后台是通过不同的XML文件定义Labels，通过点击界面的按钮来加载不同的XML文件，从而改变整个UI所有">
+<meta property="og:updated_time" content="2015-07-09T13:08:48.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用AngularJS解决产品的国际化多语言版本问题">
+<meta name="twitter:description" content="摘要：产品在国际化的时候，面临需要提供多种语言版本的问题，那么在基于html技术开发的产品中，如何适配不同的语言呢。利用angular.js，我们可以比传统方式更好更优雅的解决这个问题。参考： AngularJS中文网最近，市场方面提出了客户端国际化的需求，包括英文版和繁体中文版。我们的WEB后台是通过不同的XML文件定义Labels，通过点击界面的按钮来加载不同的XML文件，从而改变整个UI所有">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="/img/pcq.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Shiyi</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">More simple, more effective.</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/zhoushiyi" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/happy_zhoushiyi@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Shiyi</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/pcq.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Shiyi</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">More simple, more effective.</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/zhoushiyi" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/happy_zhoushiyi@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-angular" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/09/angular/" class="article-date">
+  	<time datetime="2015-07-09T12:25:17.000Z" itemprop="datePublished">2015-07-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      利用AngularJS解决产品的国际化多语言版本问题
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AngularJS/">AngularJS</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>摘要：产品在国际化的时候，面临需要提供多种语言版本的问题，那么在基于html技术开发的产品中，如何适配不同的语言呢。利用angular.js，我们可以比传统方式更好更优雅的解决这个问题。<br>参考： <a href="http://www.apjs.net/" target="_blank" rel="external">AngularJS中文网</a><br>最近，市场方面提出了客户端国际化的需求，包括英文版和繁体中文版。我们的WEB后台是通过不同的XML文件定义Labels，通过点击界面的按钮来加载不同的XML文件，从而改变整个UI所有标签的语言。<br>现在，当我们使用HTML5作为客户端用户界面的主要实现技术时，面对这一需求，有哪些可行的技术方案呢？<br>很容易的，我们可以想到一种类似于UCM后台处理同样问题的办法：<br>使用XML或者JSON文件为不同的语言定义Labels变量（变量名相同）和值（不同的语言）<br>使用JS读取XML或者JSON文件，动态的修改HTML标签的label<br>这种方法的好处：如果页面的label很多，由于不同的语言定义在不同的文件中，对于从网络访问的站点式应用来说，可以减少加载的数据量，提高加载速度。<br>其缺点是：由于需要动态的去设置html标签的label，html代码的可读性较差，不能很好的表达语义。由于可读性差，可维护性自然受到极大的影响。<br>那么有没有一种可读性更好、更优雅的方式来实现我们支持不同国家语言的办法呢？<br>答案是使用angular.js的模板技术，配合html标准中的navigator.language属性，根据用户操作系统的首选语言，自动的选择页面labels的语言。<br>具体的处理流程如下：</p>
+<ul>
+<li><p>在html页面中引入angular.js</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span><span class="value">src="js</span>/<span class="attribute">angular.min.js</span>"&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<html>标记中增加 ng-app标记，告诉AngularJS处理整个HTML页并引导应用</html></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">ng-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<body>标记中增加 ng-controller属性，并将其赋值为Labels函数</body></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">ng-controller</span>=<span class="value">"Labels"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>在需要放置文本label的地方，使用标记，告诉angularJS使用Labels函数返回的label对象的某个属性渲染该标记的内容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"btn-group"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"btn btn-info"</span>&gt;</span><span class="tag">&lt;<span class="title">i</span> <span class="attribute">class</span>=<span class="value">"fa fa-lg fa-fw fa-users"</span>&gt;</span><span class="tag">&lt;/<span class="title">i</span>&gt;</span>&#123;&#123;labels.person&#125;&#125;<span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在js文件中，定义Labels函数，根据navigator.language，为label的不同属性赋值，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Labels</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">switch</span> (navigator.language) &#123; </span><br><span class="line">	<span class="keyword">case</span> <span class="string">"zh-CN"</span>:</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"zh-SG"</span>:</span><br><span class="line">		$scope.labels = &#123;</span><br><span class="line">			<span class="string">"car"</span>:<span class="string">"巡逻车"</span>,</span><br><span class="line">			<span class="string">"building"</span>:<span class="string">"局所"</span>,</span><br><span class="line">			<span class="string">"person"</span>:<span class="string">"警员"</span>,</span><br><span class="line">			<span class="string">"camera"</span>:<span class="string">"监控头"</span>,</span><br><span class="line">			<span class="string">"street"</span>:<span class="string">"街道"</span>,</span><br><span class="line">			<span class="string">"3d"</span>:<span class="string">"三维"</span>,</span><br><span class="line">			<span class="string">"satellite"</span>:<span class="string">"卫星"</span>,</span><br><span class="line">			<span class="string">"closearea"</span>:<span class="string">"关闭"</span>,</span><br><span class="line">			<span class="string">"circle"</span>:<span class="string">"圆形"</span>,</span><br><span class="line">			<span class="string">"square"</span>:<span class="string">"矩形"</span>,</span><br><span class="line">			<span class="string">"polygon"</span>:<span class="string">"不规则"</span>,</span><br><span class="line">			<span class="string">"cleanall"</span>:<span class="string">"清除所有"</span>,</span><br><span class="line">			<span class="string">"selectdo"</span>:<span class="string">"选区操作"</span>,</span><br><span class="line">			<span class="string">"ok"</span>:<span class="string">"确 定"</span></span><br><span class="line">		&#125;;</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"zh-TW"</span>:</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"zh-HK"</span>:</span><br><span class="line">		$scope.labels = &#123;</span><br><span class="line">			<span class="string">"car"</span>:<span class="string">"巡邏車"</span>,</span><br><span class="line">			<span class="string">"building"</span>:<span class="string">"局所"</span>,</span><br><span class="line">			<span class="string">"person"</span>:<span class="string">"警員"</span>,</span><br><span class="line">			<span class="string">"camera"</span>:<span class="string">"監控探頭"</span>,</span><br><span class="line">			<span class="string">"street"</span>:<span class="string">"街道"</span>,</span><br><span class="line">			<span class="string">"3d"</span>:<span class="string">"三維"</span>,</span><br><span class="line">			<span class="string">"satellite"</span>:<span class="string">"衛星"</span>,</span><br><span class="line">			<span class="string">"closearea"</span>:<span class="string">"關閉"</span>,</span><br><span class="line">			<span class="string">"circle"</span>:<span class="string">"圓形"</span>,</span><br><span class="line">			<span class="string">"square"</span>:<span class="string">"矩形"</span>,</span><br><span class="line">			<span class="string">"polygon"</span>:<span class="string">"不規則"</span>,</span><br><span class="line">			<span class="string">"cleanall"</span>:<span class="string">"清除所有"</span>,</span><br><span class="line">			<span class="string">"selectdo"</span>:<span class="string">"選區操作"</span>,</span><br><span class="line">			<span class="string">"ok"</span>:<span class="string">"確 定"</span></span><br><span class="line">		&#125;;</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		$scope.labels = &#123;</span><br><span class="line">			<span class="string">"car"</span>:<span class="string">"Patrol car"</span>,</span><br><span class="line">			<span class="string">"building"</span>:<span class="string">"Police Department"</span>,</span><br><span class="line">			<span class="string">"person"</span>:<span class="string">"Officer"</span>,</span><br><span class="line">			<span class="string">"camera"</span>:<span class="string">"Surveillance camera"</span>,</span><br><span class="line">			<span class="string">"street"</span>:<span class="string">"Street View"</span>,</span><br><span class="line">			<span class="string">"3d"</span>:<span class="string">"Live View"</span>,</span><br><span class="line">			<span class="string">"satellite"</span>:<span class="string">"Satellite"</span>,</span><br><span class="line">			<span class="string">"closearea"</span>:<span class="string">"Close"</span>,</span><br><span class="line">			<span class="string">"circle"</span>:<span class="string">"Circle"</span>,</span><br><span class="line">			<span class="string">"square"</span>:<span class="string">"Square"</span>,</span><br><span class="line">			<span class="string">"polygon"</span>:<span class="string">"Polygon"</span>,</span><br><span class="line">			<span class="string">"cleanall"</span>:<span class="string">"Clean"</span>,</span><br><span class="line">			<span class="string">"selectdo"</span>:<span class="string">"Select to do"</span>,</span><br><span class="line">			<span class="string">"ok"</span>:<span class="string">"OK"</span></span><br><span class="line">		&#125;;</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>至此，已经完成了多种语言的支持，那么如何去验证是否生效呢？<br>这里介绍一种最简单的办法：<br>在Chrome浏览器的设置页面中，点击“显示高级设置”，找到“语言”配置，将语言改为其他语言<br>然后刷新你的页面，查看labels</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="angular" data-title="利用AngularJS解决产品的国际化多语言版本问题" data-url="http://zhoushiyi.com/2015/07/09/angular/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zhoushiyi"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Shiyi
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
