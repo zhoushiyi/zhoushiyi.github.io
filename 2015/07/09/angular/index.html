@@ -5,19 +5,25 @@
   
   <title>利用AngularJS解决产品的国际化多语言版本问题 | Shiyi&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="摘要：产品在国际化的时候，面临需要提供多种语言版本的问题，那么在基于html技术开发的产品中，如何适配不同的语言呢。利用AngularJS，我们可以比传统方式更好更优雅的解决这个问题。参考： AngularJS中文网
-最近，市场方面提出了客户端国际化的需求，包括英文版和繁体中文版。现在，我们使用HTML5作为客户端用户界面的主要实现技术，面对这一需求，有一种很好的方式来实现：使用angular.j">
+  <meta name="description" content="最近，市场方面提出了客户端国际化的需求，包括英文版和繁体中文版。现在，我们使用HTML5作为客户端用户界面的主要实现技术，面对这一需求，有一种很好的方式来实现：使用angular.js的模板技术，配合html标准中的navigator.language属性，根据用户操作系统的首选语言，自动的选择页面labels的语言。具体的处理流程如下：
+
+在html页面中引入angular.js
+1&amp;lt;sc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用AngularJS解决产品的国际化多语言版本问题">
 <meta property="og:url" content="http://zhoushiyi.com/2015/07/09/angular/index.html">
 <meta property="og:site_name" content="Shiyi's blog">
-<meta property="og:description" content="摘要：产品在国际化的时候，面临需要提供多种语言版本的问题，那么在基于html技术开发的产品中，如何适配不同的语言呢。利用AngularJS，我们可以比传统方式更好更优雅的解决这个问题。参考： AngularJS中文网
-最近，市场方面提出了客户端国际化的需求，包括英文版和繁体中文版。现在，我们使用HTML5作为客户端用户界面的主要实现技术，面对这一需求，有一种很好的方式来实现：使用angular.j">
-<meta property="og:updated_time" content="2015-07-09T14:13:00.395Z">
+<meta property="og:description" content="最近，市场方面提出了客户端国际化的需求，包括英文版和繁体中文版。现在，我们使用HTML5作为客户端用户界面的主要实现技术，面对这一需求，有一种很好的方式来实现：使用angular.js的模板技术，配合html标准中的navigator.language属性，根据用户操作系统的首选语言，自动的选择页面labels的语言。具体的处理流程如下：
+
+在html页面中引入angular.js
+1&amp;lt;sc">
+<meta property="og:updated_time" content="2015-07-09T23:35:47.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用AngularJS解决产品的国际化多语言版本问题">
-<meta name="twitter:description" content="摘要：产品在国际化的时候，面临需要提供多种语言版本的问题，那么在基于html技术开发的产品中，如何适配不同的语言呢。利用AngularJS，我们可以比传统方式更好更优雅的解决这个问题。参考： AngularJS中文网
-最近，市场方面提出了客户端国际化的需求，包括英文版和繁体中文版。现在，我们使用HTML5作为客户端用户界面的主要实现技术，面对这一需求，有一种很好的方式来实现：使用angular.j">
+<meta name="twitter:description" content="最近，市场方面提出了客户端国际化的需求，包括英文版和繁体中文版。现在，我们使用HTML5作为客户端用户界面的主要实现技术，面对这一需求，有一种很好的方式来实现：使用angular.js的模板技术，配合html标准中的navigator.language属性，根据用户操作系统的首选语言，自动的选择页面labels的语言。具体的处理流程如下：
+
+在html页面中引入angular.js
+1&amp;lt;sc">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -186,8 +192,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>摘要：产品在国际化的时候，面临需要提供多种语言版本的问题，那么在基于html技术开发的产品中，如何适配不同的语言呢。利用AngularJS，我们可以比传统方式更好更优雅的解决这个问题。<br>参考： <a href="http://www.apjs.net/" target="_blank" rel="external">AngularJS中文网</a></p>
-<p>最近，市场方面提出了客户端国际化的需求，包括英文版和繁体中文版。<br>现在，我们使用HTML5作为客户端用户界面的主要实现技术，面对这一需求，有一种很好的方式来实现：<br>使用angular.js的模板技术，配合html标准中的navigator.language属性，根据用户操作系统的首选语言，自动的选择页面labels的语言。<br>具体的处理流程如下：</p>
+        <p>最近，市场方面提出了客户端国际化的需求，包括英文版和繁体中文版。<br>现在，我们使用HTML5作为客户端用户界面的主要实现技术，面对这一需求，有一种很好的方式来实现：<br>使用angular.js的模板技术，配合html标准中的navigator.language属性，根据用户操作系统的首选语言，自动的选择页面labels的语言。<br>具体的处理流程如下：</p>
 <ul>
 <li><p>在html页面中引入angular.js</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"js/angular.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -209,6 +214,7 @@
 </li>
 </ul>
 <p>至此，已经完成了多种语言的支持，那么如何去验证是否生效呢？<br>这里介绍一种最简单的办法：<br>在Chrome浏览器的设置页面中，点击“显示高级设置”，找到“语言”配置，将语言改为其他语言<br>然后刷新你的页面，查看labels</p>
+<p>参考： <a href="http://www.apjs.net/" target="_blank" rel="external">AngularJS中文网</a></p>
 
       
     </div>
