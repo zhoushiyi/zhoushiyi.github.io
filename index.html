@@ -107,7 +107,7 @@ var _hmt = _hmt || [];
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/练习/" style="font-size: 10px;">练习</a>
+						<a href="/tags/C-C/" style="font-size: 10px;">C/C++</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/练习/" style="font-size: 10px;">练习</a>
 					</div>
 				</section>
 				
@@ -160,6 +160,84 @@ var _hmt = _hmt || [];
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Understanding-pointer" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/03/Understanding-pointer/" class="article-date">
+  	<time datetime="2015-10-03T02:50:10.000Z" itemprop="datePublished">2015-10-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/03/Understanding-pointer/">理解指针</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在讲指针之前，先简单了解一些预备知识。</p>
+<ul>
+<li><strong>字节</strong>(byte)是<strong>最基本</strong>的存储单位，而<strong>位</strong>(bit)是<strong>最小</strong>的存储单位，1byte = 8bit。那么一个字节可以存储无符号值 0-255 或者有符号值 -128至127。</li>
+<li>为了存储更大的值，我们把两个或更多的字节合在一起作为一个更大的存储单位：<strong>字</strong>。<br>一个字包含的位数就叫做<strong>字长</strong>。字长是CPU的主要技术指标之一，指的是CPU一次能并行处理的二进制位数。PC机所谓的16位、32位、64位指的就是字长。很显然，假设指令数目相同的情况下，字长越长，CPU单位时间能处理的数据或指令就越多，速度也就越快。</li>
+<li>计算机的内存被组织成一个由<strong>N个连续的字节大小</strong>的单元组成的数组。每个字节都有一个唯一的<strong>地址</strong>。第一个字节的地址为0，接下来的字节地址为1，依此类推。（<em>为简化讨论，这里不引入物理地址和虚拟地址等概念</em>）<br>这是一个线性的<strong>地址空间</strong>：<br>{ 0， 1， 2， ……， N }，N = 2^n。<br>对于32位系统，地址总线的宽度是32位，这个位数决定了地址空间的范围：<strong>[0~2^32)</strong>，所以内存大小最大为<strong>2^32byte = 4G</strong>。</li>
+<li>就像一个门牌号对应一个房间一样，要访问一个内存单元就得知道它的地址。对于程序员来说，要记住地址是比较困难的，如果给地址取个名字的话则方便多了。这些名字就是高级语言中所称的<strong>变量</strong>。变量是由高级语言的编译器为我们实现的，变量给了我们一种更方便的方法来访问内存单元，程序员不必明确的知道编译器将变量放在内存中的什么位置，我们通常只关心变量的值（也就是内存单元中所存储的数据）</li>
+<li>数据类型，在C语言中数据类型有整型、浮点型、指针和聚合类型（数组和结构体等）。变量用来存储数据，所以变量也同样分为这几种类型，变量的大小由类型决定。</li>
+</ul>
+<p>下面进入正题：</p>
+<blockquote>
+<p>指针</p>
+</blockquote>
+<p>指针是变量。指针变量的值是地址。<br>前面有提到32位系统的地址最大为2^32，所以至少要有4个字节即2^32位的二进制数才能表示的了。所以指针变量的大小为4个字节。（与字长相等）<br>任何一个变量都有地址，通过<strong>操作符&amp;</strong>可以获取到变量的地址。<br>如果指针p的值是<strong>变量a的地址</strong>，我们称 <strong>p指向a</strong>。<br>通过<strong>操作符*</strong>可以<strong>解引用指针</strong>，即得到指针所指向的内存单元的值。<br>因为指针也是变量，所以它也有地址，如果将一个指针的地址保存到另一个指针变量中，那么就产生了一个<strong>二级指针</strong>（指向指针的指针）。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">112</span>;</span><br><span class="line"><span class="keyword">int</span> *pa = &amp;a; <span class="comment">//指针pa的值为变量a的地址，pa指向a</span></span><br><span class="line"><span class="keyword">int</span> **ppa = &amp;pa; <span class="comment">//ppa是一个二级指针，ppa指向pa</span></span><br><span class="line"><span class="keyword">int</span> b = *pa;  <span class="comment">//*pa的值就是a的值112</span></span><br><span class="line"><span class="keyword">int</span> c = **ppa;  <span class="comment">//因为是二级指针，如果要获取a的值，要解引用两次</span></span><br><span class="line"><span class="keyword">int</span> *pa2 = *ppa;  <span class="comment">//*ppa的值为指针变量pa的值，即变量a的地址</span></span><br></pre></td></tr></table></figure></p>
+<p>如果指针的类型与它所指向的变量的类型不同，会怎么样呢？例如：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假设为32位系统，小端存储</span></span><br><span class="line"><span class="keyword">int</span> a= <span class="number">0x00011000</span>;  <span class="comment">//a=2^16+2^12=69632</span></span><br><span class="line"><span class="keyword">int</span> *pa1 = &amp;a;</span><br><span class="line"><span class="keyword">short</span> *pa2 = pa1; </span><br><span class="line"><span class="keyword">int</span> b = *pa2;  <span class="comment">//b=2^12=4096</span></span><br><span class="line"><span class="keyword">void</span> *p = pa2;</span><br><span class="line"><span class="keyword">int</span> c = *p;  <span class="comment">//error!</span></span><br></pre></td></tr></table></figure></p>
+<p>可见，解引用得到的结果依赖于指针的类型。也就是说，指针的类型决定了解引用将会从内存中取出多少个连续的字节。我们知道short一般占2个字节，而int占4个字节，所以即使指针pa1和pa2的值都是整型变量a的地址（a占4个字节，这里的地址是4个字节中第1个字节的地址），但是对两者解引用所得到的值却是不同的，因为pa2的类型是short*，对其解引用将只得到变量a前2个字节所表示的数值（4096）。</p>
+<p>我们必须明白不管指针本身的类型是什么，指针变量的值始终是一个地址，而地址就是一个整数。那么指针到底要声明成什么类型则完全取决于程序员想怎么使用这个指针。<br>甚至可以将指针声明为void*类型，它可以存储任何变量的地址。但是如果你对一个void*类型的指针解引用，编译器将报错，因为void*代表没有类型，编译器将不知道要从该指针所指向的地址位置取出多少个字节。</p>
+<blockquote>
+<p>指针的声明</p>
+</blockquote>
+<p>前面举的例子中，指针的声明都比较简单，很容易看出指针所指向的数据类型。下面看一些更复杂的声明：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *f(<span class="keyword">void</span>);  <span class="comment">//f是一个函数，它的返回值类型为int*(指向整型的指针)</span></span><br><span class="line"><span class="keyword">int</span> (*f)(<span class="keyword">void</span>);  <span class="comment">//f是一个函数指针，它指向的函数的返回值为int</span></span><br><span class="line"><span class="keyword">int</span> *(*f)(<span class="keyword">void</span>);  <span class="comment">//f也是函数指针，它指向的函数的返回值为int*</span></span><br><span class="line"><span class="keyword">int</span> *f[];  <span class="comment">//f是一个数组，它的元素类型是int*</span></span><br><span class="line"><span class="keyword">int</span> (*f[])(<span class="keyword">void</span>);  <span class="comment">//f是一个数组，它的元素类型是函数指针，这个函数指针所指向的函数的返回值是int</span></span><br><span class="line"><span class="keyword">int</span> *(*f[])(<span class="keyword">void</span>);  <span class="comment">//f是一个数组，它的元素类型是函数指针，这个函数指针所指向的函数的返回值是int*</span></span><br></pre></td></tr></table></figure></p>
+<p>正确识别上面的声明的诀窍在于，找到所有的操作符，然后按正确的次序执行它们，比如第5行的声明中，第1个括号中[]的优先级高于*，所以括号内的表达式*f[]首先进行求值，所以f是一个元素为某种类型的指针的数组。<br>第2个括号()是函数调用操作符，所以f数组的元素的类型是函数指针，函数的返回值是int(整型)。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/10/03/Understanding-pointer/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-ADT" class="article article-type-post" itemscope itemprop="blogPost">
   
