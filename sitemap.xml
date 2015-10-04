@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhoushiyi.com/2015/09/06/Library-functions/</loc>
+    <lastmod>2015-10-04T01:29:39.513Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://zhoushiyi.com/2015/10/03/Understanding-pointer/</loc>
     <lastmod>2015-10-03T15:02:45.042Z</lastmod>
   </url>
@@ -19,11 +24,6 @@
   <url>
     <loc>http://zhoushiyi.com/2015/09/28/ADT/</loc>
     <lastmod>2015-09-28T15:44:38.723Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://zhoushiyi.com/2015/09/06/string-practice/</loc>
-    <lastmod>2015-09-27T17:13:05.082Z</lastmod>
   </url>
   
 </urlset>
